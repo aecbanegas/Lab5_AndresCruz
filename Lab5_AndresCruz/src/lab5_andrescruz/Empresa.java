@@ -2,6 +2,8 @@
 package lab5_andrescruz;
 
 import java.util.Date;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 public class Empresa {
     String Nombre;
@@ -11,18 +13,29 @@ public class Empresa {
     String ubicacion;
     String id_sucursal;
     String pin;
+    DefaultTreeModel arbol;
 // cuentan con un nombre(único), capital financiero (dependerá de su tipo), fecha de fundación, 
 //         y ubicación de la sucursal, id sucursal (Es único y debe ser un entero), PIN de acceso.   
 
-    public Empresa(String Nombre, double capital, Date fundacion, String ubicacion, String id_sucursal, String pin) {
+    public Empresa(String Nombre, double capital, Date fundacion, String tipo, String ubicacion, String id_sucursal, String pin, DefaultTreeModel arbol) {
         this.Nombre = Nombre;
         this.capital = capital;
         this.fundacion = fundacion;
+        this.tipo = tipo;
         this.ubicacion = ubicacion;
         this.id_sucursal = id_sucursal;
         this.pin = pin;
+        this.arbol = arbol;
     }
 
+    public DefaultTreeModel getArbol() {
+        return arbol;
+    }
+
+    public void setArbol(DefaultTreeModel arbol) {
+        this.arbol = arbol;
+    }
+    
     public String getTipo() {
         return tipo;
     }

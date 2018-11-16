@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 public class Lab5_AndresCruz extends javax.swing.JFrame {
 
@@ -378,7 +380,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         String Nombre;
         double capital = 0;
         Date fundacion;
-        String tipo;
+        String tipo="";
         String ubicacion;
         String id_sucursal;
         String pin;
@@ -419,8 +421,11 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
                     tf_pin.setText("");
                     cb_tipo.setSelectedIndex(0);
                     ta_ubicacion.setText("");
-                    dc_fundacion.setDate(new Date());
-                    lista.add(new Empresa(Nombre, capital, fundacion, ubicacion, id_sucursal, pin));
+                    dc_fundacion.setDate(new Date());                    
+                    DefaultTreeModel arbol=(DefaultTreeModel)jTree1.getModel();
+                    DefaultMutableTreeNode t=new DefaultMutableTreeNode(Nombre);
+                    arbol.setRoot(t);                                     
+                    lista.add(new Empresa(Nombre, capital, fundacion, tipo, ubicacion, id_sucursal, pin, arbol));
                     JOptionPane.showMessageDialog(jd_empresa, "Se creo la empresa de manera correcta!");
                     jd_empresa.dispose();
                 }
@@ -495,6 +500,10 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         }
 
         if (id && pf_contra.getText().equals(lista.get(index).getPin())) {
+            seleccionado=lista.get(index);
+            jTree1.setModel(seleccionado.getArbol());
+            nombrelabel.setText(seleccionado.getNombre());
+            idlabel.setText(seleccionado.getId_sucursal());
             tf_id.setText("");
             pf_contra.setText("");
             jd_menuempresa.setModal(true);
