@@ -10,13 +10,19 @@ package lab5_andrescruz;
  * @author MBanegas
  */
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 public class Lab5_AndresCruz extends javax.swing.JFrame {
-    ArrayList<Empresa>lista= new ArrayList();
+
+    ArrayList<Empresa> lista = new ArrayList();
+
     /**
      * Creates new form Lab5_AndresCruz
      */
     public Lab5_AndresCruz() {
         initComponents();
+        dc_fundacion.setDate(new Date());
     }
 
     /**
@@ -34,14 +40,14 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         dc_fundacion = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cb_tipo = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ta_ubicacion = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
         tf_idsucursal = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tf_pin = new javax.swing.JTextField();
         jb_guardarempresa = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -57,7 +63,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
 
         jLabel6.setText("Tipo de Empresa:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Micro", "Mediana", "Gran" }));
+        cb_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Micro", "Mediana", "Gran" }));
 
         jLabel7.setText("Ubicacion: ");
 
@@ -70,6 +76,16 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         jLabel9.setText("Contraseña:");
 
         jb_guardarempresa.setText("Guardar");
+        jb_guardarempresa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_guardarempresaMouseClicked(evt);
+            }
+        });
+        jb_guardarempresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_guardarempresaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jd_empresaLayout = new javax.swing.GroupLayout(jd_empresa.getContentPane());
         jd_empresa.getContentPane().setLayout(jd_empresaLayout);
@@ -93,7 +109,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jd_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(dc_fundacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(cb_tipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jd_empresaLayout.createSequentialGroup()
                         .addGroup(jd_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
@@ -101,7 +117,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jd_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tf_idsucursal)
-                            .addComponent(jTextField1))))
+                            .addComponent(tf_pin))))
                 .addContainerGap(182, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_empresaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -122,7 +138,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jd_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jd_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
@@ -134,7 +150,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jd_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_pin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jb_guardarempresa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -207,9 +223,100 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
 
     private void jb_crearempresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crearempresaMouseClicked
         // TODO add your handling code here:
-        
+        jd_empresa.setModal(true);
+        jd_empresa.pack();
+        jd_empresa.setLocationRelativeTo(this);
+        jd_empresa.setVisible(true);
     }//GEN-LAST:event_jb_crearempresaMouseClicked
 
+    private void jb_guardarempresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_guardarempresaMouseClicked
+        // TODO add your handling code here:
+        String Nombre;
+        double capital = 0;
+        Date fundacion;
+        String tipo;
+        String ubicacion;
+        String id_sucursal;
+        String pin;
+        if (tf_pin.getText().isEmpty() || tf_idsucursal.getText().isEmpty() || tf_nombreempresa.getText().isEmpty()||ta_ubicacion.toString().isEmpty()) {
+            JOptionPane.showMessageDialog(jd_empresa, "Algunos campos estan vacios!!");
+        } else {
+            try {
+                Nombre = tf_nombreempresa.getText();
+                if (cb_tipo.getSelectedItem().toString().equals("Micro")) {
+                    capital = 80000;
+                    tipo = cb_tipo.getSelectedItem().toString();
+                }
+                if (cb_tipo.getSelectedItem().toString().equals("Mediana")) {
+                    capital = 120000;
+                    tipo = cb_tipo.getSelectedItem().toString();
+                }
+                if (cb_tipo.getSelectedItem().toString().equals("Gran")) {
+                    capital = 169000;
+                    tipo = cb_tipo.getSelectedItem().toString();
+                }
+                fundacion = dc_fundacion.getDate();
+                ubicacion = ta_ubicacion.getText();
+                id_sucursal = tf_idsucursal.getText();
+                pin = tf_pin.getText();
+                if (nom(Nombre)||idsuc(id_sucursal)||idsucint(id_sucursal)) {
+                    if (nom(Nombre)) {
+                        JOptionPane.showMessageDialog(jd_empresa, "Ya existe otra empresa con ese nombre!!");
+                    }
+                    if (idsuc(id_sucursal)) {
+                        JOptionPane.showMessageDialog(jd_empresa,"Ya existe otra empresa con ese ID de sucursal!!" );
+                    }
+                    if (idsucint(id_sucursal)) {
+                        JOptionPane.showMessageDialog(jd_empresa,"La id de sucursal debe ser siempre numerico!!" );
+                    }
+                }else{
+                    tf_idsucursal.setText("");
+                    tf_nombreempresa.setText("");
+                    tf_pin.setText("");
+                    cb_tipo.setSelectedIndex(0);
+                    ta_ubicacion.setText("");
+                    dc_fundacion.setDate(new Date());
+                lista.add(new Empresa(Nombre, capital, fundacion, ubicacion, id_sucursal, pin));
+                JOptionPane.showMessageDialog(jd_empresa, "Se creo la empresa de manera correcta!");
+                jd_empresa.dispose();
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(jd_empresa, "Datos ingresados incorrectos!!");
+            }
+
+        }
+    }//GEN-LAST:event_jb_guardarempresaMouseClicked
+
+    private void jb_guardarempresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_guardarempresaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_guardarempresaActionPerformed
+    
+    private boolean nom(String nombre){
+        for (int i = 0; i < lista.size(); i++) {
+            if (nombre.equals(lista.get(i).getNombre())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private boolean idsuc(String nombre){
+        for (int i = 0; i < lista.size(); i++) {
+            if (nombre.equals(lista.get(i).getId_sucursal())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private boolean idsucint(String nombre){
+        for (int i = 0; i < nombre.length(); i++) {
+            if (Character.isDigit(nombre.charAt(i))) {
+                
+            }else{
+            return true;
+            }
+        }
+        return false;
+    }
     /**
      * @param args the command line arguments
      */
@@ -246,8 +353,8 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cb_tipo;
     private com.toedter.calendar.JDateChooser dc_fundacion;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -259,7 +366,6 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jb_crearempresa;
     private javax.swing.JButton jb_entrar;
     private javax.swing.JButton jb_guardarempresa;
@@ -268,5 +374,6 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
     private javax.swing.JTextField tf_id;
     private javax.swing.JTextField tf_idsucursal;
     private javax.swing.JTextField tf_nombreempresa;
+    private javax.swing.JTextField tf_pin;
     // End of variables declaration//GEN-END:variables
 }
