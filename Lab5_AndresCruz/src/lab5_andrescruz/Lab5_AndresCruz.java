@@ -9,8 +9,9 @@ package lab5_andrescruz;
  *
  * @author MBanegas
  */
+import java.util.ArrayList;
 public class Lab5_AndresCruz extends javax.swing.JFrame {
-
+    ArrayList<Empresa>lista= new ArrayList();
     /**
      * Creates new form Lab5_AndresCruz
      */
@@ -27,6 +28,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jd_empresa = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tf_id = new javax.swing.JTextField();
@@ -34,6 +36,17 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jb_crearempresa = new javax.swing.JButton();
         jb_entrar = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jd_empresaLayout = new javax.swing.GroupLayout(jd_empresa.getContentPane());
+        jd_empresa.getContentPane().setLayout(jd_empresaLayout);
+        jd_empresaLayout.setHorizontalGroup(
+            jd_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 638, Short.MAX_VALUE)
+        );
+        jd_empresaLayout.setVerticalGroup(
+            jd_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 373, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,6 +150,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JButton jb_crearempresa;
     private javax.swing.JButton jb_entrar;
+    private javax.swing.JDialog jd_empresa;
     private javax.swing.JTextField tf_id;
     // End of variables declaration//GEN-END:variables
 }

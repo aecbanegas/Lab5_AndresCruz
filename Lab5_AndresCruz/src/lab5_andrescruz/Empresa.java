@@ -7,6 +7,7 @@ public class Empresa {
     String Nombre;
     double capital;
     Date fundacion;
+    String tipo;
     String ubicacion;
     String id_sucursal;
     String pin;
@@ -22,6 +23,16 @@ public class Empresa {
         this.pin = pin;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
+    
+    
     public String getNombre() {
         return Nombre;
     }
@@ -72,7 +83,7 @@ public class Empresa {
 
     @Override
     public String toString() {
-        return "ID "+id_sucursal;
+        return Nombre;
     }
     
 }
