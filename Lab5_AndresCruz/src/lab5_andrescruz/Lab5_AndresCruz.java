@@ -26,6 +26,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
     public Lab5_AndresCruz() {
         initComponents();
         dc_fundacion.setDate(new Date());
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -56,7 +57,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         nombrelabel = new javax.swing.JLabel();
         idlabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        jt_empresa = new javax.swing.JTree();
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -79,6 +80,16 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         Contratar = new javax.swing.JMenuItem();
         popupinfo = new javax.swing.JPopupMenu();
         Informacion = new javax.swing.JMenuItem();
+        modificarempleado = new javax.swing.JDialog();
+        jLabel15 = new javax.swing.JLabel();
+        tf_nombreempleado1 = new javax.swing.JTextField();
+        dc_nacimiento1 = new com.toedter.calendar.JDateChooser();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        tf_correo1 = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        cb_cargo1 = new javax.swing.JComboBox<>();
+        jb_crear1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tf_id = new javax.swing.JTextField();
@@ -193,8 +204,13 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         idlabel.setText("jLabel11");
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane2.setViewportView(jTree1);
+        jt_empresa.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jt_empresa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jt_empresaMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jt_empresa);
 
         jButton1.setText("Crear Empleado");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -206,6 +222,11 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         jLabel10.setText("Lista Empleados: ");
 
         jl_empleados.setModel(new DefaultListModel());
+        jl_empleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jl_empleadosMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jl_empleados);
 
         jButton2.setText("Log Out");
@@ -320,6 +341,11 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         );
 
         Modificar.setText("Modificar");
+        Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarActionPerformed(evt);
+            }
+        });
         popupempleados.add(Modificar);
 
         Eliminar.setText("Eliminar");
@@ -331,8 +357,70 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         Contratar.setText("Contratar");
         popupempleados.add(Contratar);
 
-        Informacion.setText("Indormacion");
+        Informacion.setText("Informacion");
         popupinfo.add(Informacion);
+
+        jLabel15.setText("Nombre: ");
+
+        jLabel16.setText("Nacimiento:");
+
+        jLabel17.setText("Correo:");
+
+        jLabel18.setText("Cargo:");
+
+        cb_cargo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ingeniero", "Medico", "Estudiante", "Licenciado", "Maestro" }));
+
+        jb_crear1.setText("Modificar");
+        jb_crear1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_crear1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout modificarempleadoLayout = new javax.swing.GroupLayout(modificarempleado.getContentPane());
+        modificarempleado.getContentPane().setLayout(modificarempleadoLayout);
+        modificarempleadoLayout.setHorizontalGroup(
+            modificarempleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(modificarempleadoLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(modificarempleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(modificarempleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jb_crear1)
+                    .addGroup(modificarempleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(dc_nacimiento1, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                        .addComponent(tf_nombreempleado1)
+                        .addComponent(tf_correo1))
+                    .addComponent(cb_cargo1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(79, Short.MAX_VALUE))
+        );
+        modificarempleadoLayout.setVerticalGroup(
+            modificarempleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(modificarempleadoLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(modificarempleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(tf_nombreempleado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(modificarempleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dc_nacimiento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addGap(18, 18, 18)
+                .addGroup(modificarempleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(tf_correo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(modificarempleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(cb_cargo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addComponent(jb_crear1)
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -459,7 +547,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
                     cb_tipo.setSelectedIndex(0);
                     ta_ubicacion.setText("");
                     dc_fundacion.setDate(new Date());                    
-                    DefaultTreeModel arbol=(DefaultTreeModel)jTree1.getModel();
+                    DefaultTreeModel arbol=(DefaultTreeModel)jt_empresa.getModel();
                     DefaultMutableTreeNode t=new DefaultMutableTreeNode(Nombre);
                     arbol.setRoot(t);                                     
                     lista.add(new Empresa(Nombre, capital, fundacion, tipo, ubicacion, id_sucursal, pin, arbol));
@@ -538,7 +626,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
 
         if (id && pf_contra.getText().equals(lista.get(index).getPin())) {
             seleccionado=lista.get(index);
-            jTree1.setModel(seleccionado.getArbol());
+            jt_empresa.setModel(seleccionado.getArbol());
             nombrelabel.setText(seleccionado.getNombre());
             idlabel.setText(seleccionado.getId_sucursal());
             tf_id.setText("");
@@ -560,6 +648,43 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         jd_empleado.setLocationRelativeTo(jd_menuempresa);
         jd_empleado.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jl_empleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_empleadosMouseClicked
+        // TODO add your handling code here:
+        if (jl_empleados.getSelectedIndex() >= 0) {
+            if (evt.isMetaDown()) {
+                popupempleados.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+        }
+    }//GEN-LAST:event_jl_empleadosMouseClicked
+
+    private void jt_empresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_empresaMouseClicked
+        // TODO add your handling code here:
+        if (evt.isMetaDown()) {
+            //seleccionar un nodo con click derecho
+            int row=jt_empresa.getClosestRowForLocation(evt.getX(), evt.getY());
+            jt_empresa.setSelectionRow(row);
+            Object v1=jt_empresa.getSelectionPath().getLastPathComponent();
+            nodo_seleccionado=(DefaultMutableTreeNode)v1;            
+            popupinfo.show(evt.getComponent(), evt.getX(), evt.getY());            
+        }
+    }//GEN-LAST:event_jt_empresaMouseClicked
+
+    private void jb_crear1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crear1MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jb_crear1MouseClicked
+
+    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+        // TODO add your handling code here:
+        if (jl_empleados.getSelectedIndex()>=0) {
+            DefaultListModel modelo=(DefaultListModel)jl_empleados.getModel();
+            persona_seleccionada=(Empleado)modelo.getElementAt(jl_empleados.getSelectedIndex());
+            modificarempleado.setModal(true);
+            modificarempleado.pack();
+            modificarempleado.setLocationRelativeTo(jd_menuempresa);
+        }
+    }//GEN-LAST:event_ModificarActionPerformed
 
     private boolean nom(String nombre) {
         for (int i = 0; i < lista.size(); i++) {
@@ -632,9 +757,11 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
     private javax.swing.JMenuItem Modificar;
     private javax.swing.JMenuItem VerDetalles;
     private javax.swing.JComboBox<String> cb_cargo;
+    private javax.swing.JComboBox<String> cb_cargo1;
     private javax.swing.JComboBox<String> cb_tipo;
     private com.toedter.calendar.JDateChooser dc_fundacion;
     private com.toedter.calendar.JDateChooser dc_nacimiento;
+    private com.toedter.calendar.JDateChooser dc_nacimiento1;
     private javax.swing.JLabel idlabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -644,6 +771,10 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -655,8 +786,8 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTree jTree1;
     private javax.swing.JButton jb_crear;
+    private javax.swing.JButton jb_crear1;
     private javax.swing.JButton jb_crearempresa;
     private javax.swing.JButton jb_entrar;
     private javax.swing.JButton jb_guardarempresa;
@@ -664,17 +795,23 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
     private javax.swing.JDialog jd_empresa;
     private javax.swing.JDialog jd_menuempresa;
     private javax.swing.JList<String> jl_empleados;
+    private javax.swing.JTree jt_empresa;
+    private javax.swing.JDialog modificarempleado;
     private javax.swing.JLabel nombrelabel;
     private javax.swing.JPasswordField pf_contra;
     private javax.swing.JPopupMenu popupempleados;
     private javax.swing.JPopupMenu popupinfo;
     private javax.swing.JTextArea ta_ubicacion;
     private javax.swing.JTextField tf_correo;
+    private javax.swing.JTextField tf_correo1;
     private javax.swing.JTextField tf_id;
     private javax.swing.JTextField tf_idsucursal;
     private javax.swing.JTextField tf_nombreempleado;
+    private javax.swing.JTextField tf_nombreempleado1;
     private javax.swing.JTextField tf_nombreempresa;
     private javax.swing.JTextField tf_pin;
     // End of variables declaration//GEN-END:variables
 Empresa seleccionado;
+DefaultMutableTreeNode nodo_seleccionado;
+    Empleado persona_seleccionada;
 }
