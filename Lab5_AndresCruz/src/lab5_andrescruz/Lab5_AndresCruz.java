@@ -61,6 +61,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jl_empleados = new javax.swing.JList<>();
+        jButton2 = new javax.swing.JButton();
         jd_empleado = new javax.swing.JDialog();
         jLabel11 = new javax.swing.JLabel();
         tf_nombreempleado = new javax.swing.JTextField();
@@ -71,6 +72,13 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         cb_cargo = new javax.swing.JComboBox<>();
         jb_crear = new javax.swing.JButton();
+        popupempleados = new javax.swing.JPopupMenu();
+        Modificar = new javax.swing.JMenuItem();
+        Eliminar = new javax.swing.JMenuItem();
+        VerDetalles = new javax.swing.JMenuItem();
+        Contratar = new javax.swing.JMenuItem();
+        popupinfo = new javax.swing.JPopupMenu();
+        Informacion = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tf_id = new javax.swing.JTextField();
@@ -189,11 +197,18 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTree1);
 
         jButton1.setText("Crear Empleado");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jLabel10.setText("Lista Empleados: ");
 
         jl_empleados.setModel(new DefaultListModel());
         jScrollPane3.setViewportView(jl_empleados);
+
+        jButton2.setText("Log Out");
 
         javax.swing.GroupLayout jd_menuempresaLayout = new javax.swing.GroupLayout(jd_menuempresa.getContentPane());
         jd_menuempresa.getContentPane().setLayout(jd_menuempresaLayout);
@@ -208,11 +223,16 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
                         .addComponent(idlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jd_menuempresaLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
                         .addGroup(jd_menuempresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jLabel10)
+                            .addGroup(jd_menuempresaLayout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2))
+                            .addGroup(jd_menuempresaLayout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jScrollPane3))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -227,7 +247,9 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
                 .addGroup(jd_menuempresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jd_menuempresaLayout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addGroup(jd_menuempresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -296,6 +318,21 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
                 .addComponent(jb_crear)
                 .addContainerGap(37, Short.MAX_VALUE))
         );
+
+        Modificar.setText("Modificar");
+        popupempleados.add(Modificar);
+
+        Eliminar.setText("Eliminar");
+        popupempleados.add(Eliminar);
+
+        VerDetalles.setText("Ver Detalles");
+        popupempleados.add(VerDetalles);
+
+        Contratar.setText("Contratar");
+        popupempleados.add(Contratar);
+
+        Informacion.setText("Indormacion");
+        popupinfo.add(Informacion);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -516,6 +553,14 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jb_entrarMouseClicked
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        jd_empleado.setModal(true);
+        jd_empleado.pack();
+        jd_empleado.setLocationRelativeTo(jd_menuempresa);
+        jd_empleado.setVisible(true);
+    }//GEN-LAST:event_jButton1MouseClicked
+
     private boolean nom(String nombre) {
         for (int i = 0; i < lista.size(); i++) {
             if (nombre.equals(lista.get(i).getNombre())) {
@@ -581,12 +626,18 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Contratar;
+    private javax.swing.JMenuItem Eliminar;
+    private javax.swing.JMenuItem Informacion;
+    private javax.swing.JMenuItem Modificar;
+    private javax.swing.JMenuItem VerDetalles;
     private javax.swing.JComboBox<String> cb_cargo;
     private javax.swing.JComboBox<String> cb_tipo;
     private com.toedter.calendar.JDateChooser dc_fundacion;
     private com.toedter.calendar.JDateChooser dc_nacimiento;
     private javax.swing.JLabel idlabel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -615,6 +666,8 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
     private javax.swing.JList<String> jl_empleados;
     private javax.swing.JLabel nombrelabel;
     private javax.swing.JPasswordField pf_contra;
+    private javax.swing.JPopupMenu popupempleados;
+    private javax.swing.JPopupMenu popupinfo;
     private javax.swing.JTextArea ta_ubicacion;
     private javax.swing.JTextField tf_correo;
     private javax.swing.JTextField tf_id;
