@@ -12,6 +12,8 @@ package lab5_andrescruz;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -28,7 +30,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         initComponents();
         dc_fundacion.setDate(new Date());
         this.setLocationRelativeTo(null);
-        fog=null;
+        fog = null;
         dc_nacimiento.setDate(new Date());
         dc_nacimiento1.setDate(new Date());
     }
@@ -829,13 +831,22 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
 
     private void jb_crearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crearMouseClicked
         // TODO add your handling code here:
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        String email = tf_correo.getText();
+        Matcher mather = pattern.matcher(email);
+        boolean esemail = false;
+        if (mather.find() == true) {
+            esemail = true;
+        }
         String nombre;
         Date nacimiento;
         String correo;
         String cargo;
         double salario = 0;
-        if (tf_nombreempleado.getText().isEmpty() || tf_correo.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(jd_empleado, "Algunos campos estan vacios!!");
+        if (tf_nombreempleado.getText().isEmpty() || tf_correo.getText().isEmpty() || esemail == false) {
+            JOptionPane.showMessageDialog(jd_empleado, "Algunos campos estan vacios o el correo electronico ingresado es invalido!!");
         } else {
             try {
                 nombre = tf_nombreempleado.getText();
@@ -1078,34 +1089,34 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        DefaultTreeModel modelo=(DefaultTreeModel)jt_empresa.getModel();
-        nodo_seleccionado=(DefaultMutableTreeNode)fog;
+        DefaultTreeModel modelo = (DefaultTreeModel) jt_empresa.getModel();
+        nodo_seleccionado = (DefaultMutableTreeNode) fog;
         seleccionado.setArbol(modelo);
         jd_menuempresa.dispose();
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void ContratarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContratarActionPerformed
         try {
-        DefaultListModel modeloLista = (DefaultListModel) jl_empleados.getModel();
-        if (jl_empleados.getSelectedIndex() >= 0) {
-            if (seleccionado.getCapital()>((Empleado)modeloLista.get(jl_empleados.getSelectedIndex())).getSalario()) {
-              if (nodo_seleccionado.toString().equals(((Empleado)modeloLista.get(jl_empleados.getSelectedIndex())).getNombre())) {
-                JOptionPane.showMessageDialog(jd_menuempresa, "Un empleado no se puede contratar a si mismo!");
-            }else{
-                DefaultTreeModel modeloArbol = (DefaultTreeModel) jt_empresa.getModel();
+            DefaultListModel modeloLista = (DefaultListModel) jl_empleados.getModel();
+            if (jl_empleados.getSelectedIndex() >= 0) {
+                if (seleccionado.getCapital() > ((Empleado) modeloLista.get(jl_empleados.getSelectedIndex())).getSalario()) {
+                    if (nodo_seleccionado.toString().equals(((Empleado) modeloLista.get(jl_empleados.getSelectedIndex())).getNombre())) {
+                        JOptionPane.showMessageDialog(jd_menuempresa, "Un empleado no se puede contratar a si mismo!");
+                    } else {
+                        DefaultTreeModel modeloArbol = (DefaultTreeModel) jt_empresa.getModel();
 
-                nodo_seleccionado.add(new DefaultMutableTreeNode(modeloLista.get(jl_empleados.getSelectedIndex())));
-                modeloArbol.reload();
-                seleccionado.setCapital(seleccionado.getCapital()-((Empleado)modeloLista.get(jl_empleados.getSelectedIndex())).getSalario());
-            }  
-            }else{
-            JOptionPane.showMessageDialog(jd_menuempresa, "La empresa no posee el capital suficiente!");
-            }                        
-        }    
+                        nodo_seleccionado.add(new DefaultMutableTreeNode(modeloLista.get(jl_empleados.getSelectedIndex())));
+                        modeloArbol.reload();
+                        seleccionado.setCapital(seleccionado.getCapital() - ((Empleado) modeloLista.get(jl_empleados.getSelectedIndex())).getSalario());
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(jd_menuempresa, "La empresa no posee el capital suficiente!");
+                }
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(jd_menuempresa, "Debe seleccionar un nodo del arbol para contratar!");
         }
-        
+
     }//GEN-LAST:event_ContratarActionPerformed
 
     private boolean nom(String nombre) {
