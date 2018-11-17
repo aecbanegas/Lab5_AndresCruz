@@ -949,12 +949,21 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
 
     private void jb_crear1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crear1MouseClicked
         // TODO add your handling code here:
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        String email = tf_correo.getText();
+        Matcher mather = pattern.matcher(email);
+        boolean esemail = false;
+        if (mather.find() == true) {
+            esemail = true;
+        }
         String nombre;
         Date nacimiento;
         String correo;
         String cargo;
         double salario = 0;
-        if (tf_nombreempleado1.getText().isEmpty() || tf_correo1.getText().isEmpty()) {
+        if (tf_nombreempleado1.getText().isEmpty() || tf_correo1.getText().isEmpty()||esemail==false) {
             JOptionPane.showMessageDialog(jd_empleado, "Algunos campos estan vacios!!");
         } else {
             try {
