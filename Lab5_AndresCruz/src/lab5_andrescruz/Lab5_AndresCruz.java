@@ -9,6 +9,7 @@ package lab5_andrescruz;
  *
  * @author MBanegas
  */
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultListModel;
@@ -17,7 +18,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 public class Lab5_AndresCruz extends javax.swing.JFrame {
-    
+
     ArrayList<Empresa> lista = new ArrayList();
 
     /**
@@ -27,6 +28,9 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         initComponents();
         dc_fundacion.setDate(new Date());
         this.setLocationRelativeTo(null);
+        fog=null;
+        dc_nacimiento.setDate(new Date());
+        dc_nacimiento1.setDate(new Date());
     }
 
     /**
@@ -177,9 +181,9 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel6))
                         .addGap(18, 18, 18)
-                        .addGroup(jd_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(dc_fundacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cb_tipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jd_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dc_fundacion, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jd_empresaLayout.createSequentialGroup()
                         .addGroup(jd_empresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
@@ -399,6 +403,11 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         popupempleados.add(VerDetalles);
 
         Contratar.setText("Contratar");
+        Contratar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ContratarActionPerformed(evt);
+            }
+        });
         popupempleados.add(Contratar);
 
         Informacion.setText("Informacion");
@@ -799,10 +808,10 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
                     tf_pin.setText("");
                     cb_tipo.setSelectedIndex(0);
                     ta_ubicacion.setText("");
-                    dc_fundacion.setDate(new Date());                    
+                    dc_fundacion.setDate(new Date());
                     DefaultTreeModel arbol = (DefaultTreeModel) jt_empresa.getModel();
                     DefaultMutableTreeNode t = new DefaultMutableTreeNode(Nombre);
-                    arbol.setRoot(t);                    
+                    arbol.setRoot(t);
                     lista.add(new Empresa(Nombre, capital, fundacion, tipo, ubicacion, id_sucursal, pin, arbol));
                     JOptionPane.showMessageDialog(jd_empresa, "Se creo la empresa de manera correcta!");
                     jd_empresa.dispose();
@@ -810,7 +819,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(jd_empresa, "Datos ingresados incorrectos!!");
             }
-            
+
         }
     }//GEN-LAST:event_jb_guardarempresaMouseClicked
 
@@ -861,7 +870,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(jd_empresa, "Datos ingresados incorrectos!!");
             }
-            
+
         }
     }//GEN-LAST:event_jb_crearMouseClicked
 
@@ -876,7 +885,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
                 break;
             }
         }
-        
+
         if (id && pf_contra.getText().equals(lista.get(index).getPin())) {
             seleccionado = lista.get(index);
             jt_empresa.setModel(seleccionado.getArbol());
@@ -918,9 +927,13 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
             int row = jt_empresa.getClosestRowForLocation(evt.getX(), evt.getY());
             jt_empresa.setSelectionRow(row);
             Object v1 = jt_empresa.getSelectionPath().getLastPathComponent();
-            nodo_seleccionado = (DefaultMutableTreeNode) v1;            
-            popupinfo.show(evt.getComponent(), evt.getX(), evt.getY());            
+            nodo_seleccionado = (DefaultMutableTreeNode) v1;
+            popupinfo.show(evt.getComponent(), evt.getX(), evt.getY());
         }
+        int row = jt_empresa.getClosestRowForLocation(evt.getX(), evt.getY());
+        jt_empresa.setSelectionRow(row);
+        Object v1 = jt_empresa.getSelectionPath().getLastPathComponent();
+        nodo_seleccionado = (DefaultMutableTreeNode) v1;
     }//GEN-LAST:event_jt_empresaMouseClicked
 
     private void jb_crear1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crear1MouseClicked
@@ -961,7 +974,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
                 persona_seleccionada.setCorreo(correo);
                 persona_seleccionada.setNacimiento(nacimiento);
                 persona_seleccionada.setNombre(nombre);
-                persona_seleccionada.setSalario(salario);                
+                persona_seleccionada.setSalario(salario);
                 tf_nombreempleado1.setText("");
                 dc_nacimiento1.setDate(new Date());
                 tf_correo1.setText("");
@@ -971,7 +984,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(jd_empresa, "Datos ingresados incorrectos!!");
             }
-            
+
         }
     }//GEN-LAST:event_jb_crear1MouseClicked
 
@@ -1036,22 +1049,22 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         dc_fundacion1.setDate(seleccionado.getFundacion());
         String tipo = seleccionado.getTipo();
         if (tipo.equals("Micro")) {
-            
+
             cb_tipo1.setSelectedIndex(0);
         }
         if (tipo.equals("Mediana")) {
-            
+
             cb_tipo1.setSelectedIndex(1);
         }
         if (tipo.equals("Gran")) {
-            
+
             cb_tipo1.setSelectedIndex(2);
         }
         tf_capital.setText(Double.toString(seleccionado.getCapital()));
         detallesempresa.pack();
         detallesempresa.setLocationRelativeTo(jd_menuempresa);
         detallesempresa.setModal(true);
-        detallesempresa.setVisible(true);        
+        detallesempresa.setVisible(true);
     }//GEN-LAST:event_InformacionActionPerformed
 
     private void jb_guardarempresa1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_guardarempresa1MouseClicked
@@ -1065,9 +1078,36 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
+        DefaultTreeModel modelo=(DefaultTreeModel)jt_empresa.getModel();
+        nodo_seleccionado=(DefaultMutableTreeNode)fog;
+        seleccionado.setArbol(modelo);
         jd_menuempresa.dispose();
     }//GEN-LAST:event_jButton2MouseClicked
-    
+
+    private void ContratarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContratarActionPerformed
+        try {
+        DefaultListModel modeloLista = (DefaultListModel) jl_empleados.getModel();
+        if (jl_empleados.getSelectedIndex() >= 0) {
+            if (seleccionado.getCapital()>((Empleado)modeloLista.get(jl_empleados.getSelectedIndex())).getSalario()) {
+              if (nodo_seleccionado.toString().equals(((Empleado)modeloLista.get(jl_empleados.getSelectedIndex())).getNombre())) {
+                JOptionPane.showMessageDialog(jd_menuempresa, "Un empleado no se puede contratar a si mismo!");
+            }else{
+                DefaultTreeModel modeloArbol = (DefaultTreeModel) jt_empresa.getModel();
+
+                nodo_seleccionado.add(new DefaultMutableTreeNode(modeloLista.get(jl_empleados.getSelectedIndex())));
+                modeloArbol.reload();
+                seleccionado.setCapital(seleccionado.getCapital()-((Empleado)modeloLista.get(jl_empleados.getSelectedIndex())).getSalario());
+            }  
+            }else{
+            JOptionPane.showMessageDialog(jd_menuempresa, "La empresa no posee el capital suficiente!");
+            }                        
+        }    
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(jd_menuempresa, "Debe seleccionar un nodo del arbol para contratar!");
+        }
+        
+    }//GEN-LAST:event_ContratarActionPerformed
+
     private boolean nom(String nombre) {
         for (int i = 0; i < lista.size(); i++) {
             if (nombre.equals(lista.get(i).getNombre())) {
@@ -1076,7 +1116,7 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         }
         return false;
     }
-    
+
     private boolean idsuc(String nombre) {
         for (int i = 0; i < lista.size(); i++) {
             if (nombre.equals(lista.get(i).getId_sucursal())) {
@@ -1085,11 +1125,11 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
         }
         return false;
     }
-    
+
     private boolean idsucint(String nombre) {
         for (int i = 0; i < nombre.length(); i++) {
             if (Character.isDigit(nombre.charAt(i))) {
-                
+
             } else {
                 return true;
             }
@@ -1225,4 +1265,5 @@ public class Lab5_AndresCruz extends javax.swing.JFrame {
 Empresa seleccionado;
     DefaultMutableTreeNode nodo_seleccionado;
     Empleado persona_seleccionada;
+    Object fog;
 }
